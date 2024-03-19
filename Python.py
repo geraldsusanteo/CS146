@@ -1,0 +1,36 @@
+from collections import deque
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class BinaryTreeLevelOrderTraversal:
+    def levelOrder(self, root):
+        result = []
+        
+        if not root:
+            return result
+        
+        queue = deque()
+        queue.append(root)
+        
+        while queue:
+            level_size = len(queue)
+            level_list = []
+            
+            for i in range(level_size):
+                current_node = queue.popleft()
+                level_list.append(current_node.val)
+                
+                if current_node.left:
+                    queue.append(current_node.left)
+                
+                if current_node.right:
+                    queue.append(current_node.right)
+            
+            result.append(level_list)
+        
+        return result
+
